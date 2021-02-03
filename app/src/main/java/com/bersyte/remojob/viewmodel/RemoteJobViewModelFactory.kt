@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bersyte.remojob.repository.RemoteJobRepository
 
 class RemoteJobViewModelFactory(
-
     val app: Application,
     private val remoteJobRepository: RemoteJobRepository
 ) : ViewModelProvider.Factory {
