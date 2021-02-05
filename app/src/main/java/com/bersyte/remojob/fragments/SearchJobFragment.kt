@@ -46,7 +46,6 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
 
         if (Constants.isNetworkAvailable(requireContext())) {
             searchJob()
-            setUpRecyclerView()
         } else {
             Toast.makeText(activity,"No internet connection", Toast.LENGTH_SHORT).show()
         }
@@ -66,6 +65,7 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
                 }
             }
         }
+        setUpRecyclerView()
     }
 
 

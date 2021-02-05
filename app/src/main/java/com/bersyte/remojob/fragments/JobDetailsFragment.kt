@@ -45,29 +45,32 @@ class JobDetailsFragment : Fragment(R.layout.fragment_job_details) {
 
         viewModel = (activity as MainActivity).viewModel
         currentJob = args.job!!
+
         setUpWebView()
+
         binding.fabAddFavorite.setOnClickListener {
             addJobToFavorite(view)
         }
 
     }
 
-    private fun setUpWebView(){
+    private fun setUpWebView() {
         binding.webView.apply {
             webViewClient = WebViewClient()
             currentJob.url?.let { loadUrl(it) }
         }
 
-        val settings = binding.webView.settings
-        settings.javaScriptEnabled = true
-        settings.setAppCacheEnabled(true)
-        settings.cacheMode = WebSettings.LOAD_DEFAULT
-        settings.setSupportZoom(false)
-        settings.builtInZoomControls = false
-        settings.displayZoomControls = false
-        settings.textZoom = 100
-        settings.blockNetworkImage = false
-        settings.loadsImagesAutomatically = true
+        binding.webView.settings.apply {
+            javaScriptEnabled = true
+            setAppCacheEnabled(true)
+            cacheMode = WebSettings.LOAD_DEFAULT
+            setSupportZoom(false)
+            builtInZoomControls = false
+            displayZoomControls = false
+            textZoom = 100
+            blockNetworkImage = false
+            loadsImagesAutomatically = true
+        }
     }
 
     private fun addJobToFavorite(view: View) {
