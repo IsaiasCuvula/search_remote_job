@@ -45,7 +45,9 @@ class RemoteJobRepository(private val db: RemoteJobDatabase) {
         remoteJobService.searchRemoteJob(query).enqueue(
             object : Callback<RemoteJob> {
                 override fun onResponse(call: Call<RemoteJob>, response: Response<RemoteJob>) {
-                    searchRemoteJobLiveData.postValue(response.body())
+                    if (response.body() != null) {
+                        searchRemoteJobLiveData.postValue(response.body())
+                    }
                 }
 
                 override fun onFailure(call: Call<RemoteJob>, t: Throwable) {
