@@ -17,12 +17,10 @@ import com.bersyte.remojob.adapters.RemoteJobAdapter
 import com.bersyte.remojob.databinding.FragmentRemoteJobsBinding
 import com.bersyte.remojob.utils.Constants
 import com.bersyte.remojob.viewmodel.RemoteJobViewModel
-import kotlinx.coroutines.delay
 
 
 class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
     SwipeRefreshLayout.OnRefreshListener {
-
 
     private var _binding: FragmentRemoteJobsBinding? = null
     private val binding get() = _binding!!
@@ -66,9 +64,7 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
 
     private fun setUpRecyclerView() {
         jobAdapter = RemoteJobAdapter()
-
         binding.rvRemoteJobs.apply {
-
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
             addItemDecoration(
@@ -80,13 +76,14 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
         fetchingData()
     }
 
-    private fun fetchingData(){
+
+    private fun fetchingData() {
         activity?.let {
             if (Constants.isNetworkAvailable(requireActivity())) {
 
                 remoteJobViewModel.remoteJobResult()
                     .observe(viewLifecycleOwner, { remoteJob ->
-                       // Toast.makeText(activity, "$remoteJob", Toast.LENGTH_SHORT).show()
+                        // Toast.makeText(activity, "$remoteJob", Toast.LENGTH_SHORT).show()
                         if (remoteJob != null) {
                             jobAdapter.differ.submitList(remoteJob.jobs)
                             swipeLayout.isRefreshing = false

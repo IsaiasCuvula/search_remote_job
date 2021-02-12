@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface RemoteJobAPI {
 
-    @GET("remote-jobs?limit=20")
+    @GET("remote-jobs")
     fun getRemoteJob(): Call<RemoteJob>
 
     @GET("remote-jobs")

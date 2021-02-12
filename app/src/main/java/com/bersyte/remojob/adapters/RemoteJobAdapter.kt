@@ -62,12 +62,9 @@ class RemoteJobAdapter : RecyclerView.Adapter<RemoteJobAdapter.RemoteJobViewHold
                 .actionMainFragmentToJobDetailsFragment(currentJob)
             mView.findNavController().navigate(direction)
         }
-
-
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-
 }
