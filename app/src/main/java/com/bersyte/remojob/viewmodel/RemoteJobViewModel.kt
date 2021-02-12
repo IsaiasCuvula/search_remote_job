@@ -19,9 +19,7 @@ class RemoteJobViewModel(
     fun searchJob(query: String?) =
         remoteJobRepository.searchRemoteJob(query)
 
-
     fun searchResult() = remoteJobRepository.getSearchJobResponseLiveData()
-
 
     fun insertJob(job: JobToSave) = viewModelScope.launch {
         remoteJobRepository.insertJob(job)

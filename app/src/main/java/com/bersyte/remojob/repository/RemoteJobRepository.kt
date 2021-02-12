@@ -20,10 +20,11 @@ class RemoteJobRepository(private val db: RemoteJobDatabase) {
 
 
     init {
+
         getRemoteJobResponse()
     }
 
-    private fun getRemoteJobResponse() {
+     private fun getRemoteJobResponse() {
 
         remoteJobService.getRemoteJob().enqueue(
             object : Callback<RemoteJob> {
