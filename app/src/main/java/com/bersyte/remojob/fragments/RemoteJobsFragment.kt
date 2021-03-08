@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bersyte.remojob.MainActivity
 import com.bersyte.remojob.R
 import com.bersyte.remojob.adapters.RemoteJobAdapter
+import com.bersyte.remojob.api.RetrofitInstance
 import com.bersyte.remojob.databinding.FragmentRemoteJobsBinding
 import com.bersyte.remojob.utils.Constants
 import com.bersyte.remojob.viewmodel.RemoteJobViewModel
@@ -27,7 +28,8 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
     private lateinit var remoteJobViewModel: RemoteJobViewModel
     private lateinit var jobAdapter: RemoteJobAdapter
     private lateinit var swipeLayout: SwipeRefreshLayout
-
+    private var page = 1
+    private var limit = 10
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +61,10 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
         remoteJobViewModel = (activity as MainActivity).viewModel
 
         setUpRecyclerView()
+
+        binding.swipeContainer.setOnRefreshListener {
+           fetchingData()
+        }
     }
 
 
@@ -73,6 +79,8 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
                 ) {})
             adapter = jobAdapter
         }
+
+
         fetchingData()
     }
 
@@ -83,7 +91,6 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
 
                 remoteJobViewModel.remoteJobResult()
                     .observe(viewLifecycleOwner, { remoteJob ->
-                        // Toast.makeText(activity, "$remoteJob", Toast.LENGTH_SHORT).show()
                         if (remoteJob != null) {
                             jobAdapter.differ.submitList(remoteJob.jobs)
                             swipeLayout.isRefreshing = false
@@ -102,7 +109,7 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
     }
 
     override fun onRefresh() {
-       fetchingData()
+        setUpRecyclerView()
     }
 
 }
