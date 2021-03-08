@@ -10,6 +10,7 @@ import com.bersyte.remojob.databinding.JobLayoutAdapterBinding
 import com.bersyte.remojob.fragments.MainFragmentDirections
 import com.bersyte.remojob.models.Job
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class RemoteJobAdapter : RecyclerView.Adapter<RemoteJobAdapter.RemoteJobViewHolder>() {
 
@@ -47,6 +48,7 @@ class RemoteJobAdapter : RecyclerView.Adapter<RemoteJobAdapter.RemoteJobViewHold
 
             Glide.with(this)
                 .load(currentJob.companyLogoUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding?.ivCompanyLogo!!)
 
             binding?.tvCompanyName?.text = currentJob.companyName

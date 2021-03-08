@@ -102,7 +102,7 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
     }
 
     override fun onRefresh() {
-        setUpRecyclerView()
+       fetchingData()
     }
 
 }
